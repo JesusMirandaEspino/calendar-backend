@@ -17,5 +17,9 @@
   "bugs": {
     "url": "https://github.com/JesusMirandaEspino/calendar-backend/issues"
   },
-  "homepage": "https://github.com/JesusMirandaEspino/calendar-backend#readme"
+  "homepage": "https://github.com/JesusMirandaEspino/calendar-backend#readme",
+  "dependencies": {
+    "dotenv": "^11.0.0",
+    "express": "^4.17.2"
+  }
 }
