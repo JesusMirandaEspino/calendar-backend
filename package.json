@@ -1,0 +1,21 @@
+{
+  "name": "calendar-backend",
+  "version": "1.0.0",
+  "description": "Calendar backend part",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon index.js",
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JesusMirandaEspino/calendar-backend.git"
+  },
+  "author": "Jesus Miranda",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JesusMirandaEspino/calendar-backend/issues"
+  },
+  "homepage": "https://github.com/JesusMirandaEspino/calendar-backend#readme"
+}
