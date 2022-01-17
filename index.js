@@ -8,14 +8,10 @@ const app = express();
 
 app.use( express.static('public') );
 
-// Rutas
 
-  //  codigo app.get( '/', ( req, res ) => {
-  //  codigo    console.log('Se require el /');
-  //  codigo     res.json({
-  //          ok: true
-  //      });
-  //  });
+// Rutas
+app.use(  'api/auth', require('./routes/auth') );
+
 
 
 // Escuchar las peticiones
