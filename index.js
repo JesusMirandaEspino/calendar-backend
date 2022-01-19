@@ -5,12 +5,16 @@ require( 'dotenv' ).config();
 const app = express();
 
 // Directori Publico
-
 app.use( express.static('public') );
 
 
+
+// Lectura y parse del Body
+app.use( express.json() );
+
+
 // Rutas
-app.use(  'api/auth', require('./routes/auth') );
+app.use(  '/api/auth', require('./routes/auth') );
 
 
 

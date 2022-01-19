@@ -3,9 +3,11 @@ const express = require('express');
 const res = express.response;
     
 const crearUsuario = ( req, res ) => {
+
         res.json({
             ok: true,
-            msg: 'registro'
+            msg: 'registro',
+            use: req.body
         });
     }
 
