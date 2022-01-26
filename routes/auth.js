@@ -2,6 +2,7 @@ const { Router } = require('express');
 const { check } = require('express-validator');
 const { validarCampos } = require('../middlewares/validar-campos');
 
+
 const router = Router();
 
 const { crearUsuario, loginUsuario, revalidarUsuario } = require('../controllers/auth'); 
