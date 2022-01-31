@@ -45,7 +45,7 @@ const crearUsuario = async( req, res ) => {
 }
 
 
-const loginUsuario = ( req, res ) => {
+const loginUsuario = async( req, res ) => {
 
     const { email, password } = req.body;
 
@@ -87,6 +87,12 @@ const loginUsuario = ( req, res ) => {
     }
 
     }
+
+
+
+
+
+    
 
 const revalidarUsuario = ( req, res ) => {
         res.json({
