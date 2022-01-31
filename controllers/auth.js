@@ -48,12 +48,44 @@ const crearUsuario = async( req, res ) => {
 const loginUsuario = ( req, res ) => {
 
     const { email, password } = req.body;
+
+
+    try{
+
+        let usuario = await Usuario.findOne( { email} );
+
+        if( !usuario ){
+            return res.status(400).json({
+                        ok: false,
+                        msg: 'El usuario no existe'
+                    });
+        }
+
+        const validPassword = bcrypt( password, usuario.password );
+
+        if( !validPassword ){
+            return res.status(400).json({
+                        ok: false,
+                        msg: 'Error en contraseña'
+                    });
+        }
+
+
         res.json({
             ok: true,
-            msg: 'login',
-            email,
-            password
+            uid: usuario.id,
+            name: usuario.name
         });
+
+
+    }catch(error){
+        console.error(error);
+        res.status(500).json({
+            ok: false,
+            msg: 'Por favor hable con el administrador'
+        });
+    }
+
     }
 
 const revalidarUsuario = ( req, res ) => {
