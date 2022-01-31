@@ -2,6 +2,8 @@ const express = require('express');
 const bcrypt = require('bcryptjs');
 const { validationResult } = require('express-validator');
 const Usuario = require('../models/Usuario');
+const generarJwt = require('../helpers/jwt');
+
 
 const res = express.response;
     
@@ -29,9 +31,13 @@ const crearUsuario = async( req, res ) => {
 
         await usuario.save();
 
+        
+        const token = await generarJwt( usuario.id, usuario.name );
+
             res.status(201).json({
                 ok: true,
                 msg: 'registro',
+                token
 
             });
     }
@@ -71,10 +77,13 @@ const loginUsuario = async( req, res ) => {
         }
 
 
+        const token = await generarJwt( usuario.id, usuario.name );
+
         res.json({
             ok: true,
             uid: usuario.id,
-            name: usuario.name
+            name: usuario.name,
+            token
         });
 
 
@@ -92,7 +101,7 @@ const loginUsuario = async( req, res ) => {
 
 
 
-    
+
 
 const revalidarUsuario = ( req, res ) => {
         res.json({
