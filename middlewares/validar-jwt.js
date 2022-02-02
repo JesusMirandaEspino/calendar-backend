@@ -14,8 +14,16 @@ const validarJWT = ( req, res = response, next ) => {
         });
     }
 
+    console.log(token)
+
     try{    
-        const payload = jwt.verify( token, process.env.SECRET_JWT_SEED );
+        const { id, name} = jwt.verify( token, process.env.SECRET_JWT_SEED );
+
+
+        req.uid = id;
+        req.name = name;
+
+
     }catch(error){
         return res.status(401).json({
             ok: false,
@@ -29,6 +37,6 @@ const validarJWT = ( req, res = response, next ) => {
 
 
 
-module.export = {
+module.exports = {
     validarJWT
 }
