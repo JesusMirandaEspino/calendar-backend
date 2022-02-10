@@ -2,9 +2,12 @@ const { response } = require('express');
 const Evento = require('../models/Evento');
 
 const getEvento = async ( req, res = response ) => {
+
+    const eventos = await Evento.find().populate('user', 'name');
+
     res.json({
         ok: true,
-        msg: 'getEventos'
+        eventos
     });
 }
 
@@ -14,7 +17,6 @@ const crearEvento = async ( req, res = response ) => {
     const evento = new Evento( req.body );
     
     try{
-
         evento.user = req.uid;
         const eventoGuardado = evento.save();
 
@@ -37,21 +39,81 @@ const crearEvento = async ( req, res = response ) => {
 
 const actualizarEvento = async ( req, res = response ) => {
 
-    res.json({
-    //123456
-    ok: true,
-    msg: 'actualizarEvento'
-    });
+    const eventoId = req.params.id;
+
+    try{
+        const evento = await Evento.findById( eventoId );
+
+        if( !evento ){
+            return res.status(404).json({
+                ok: false,
+                msg: 'No se encontro por el id solicitado'
+            });
+        }
+
+        if( evento.user.toString() !== uid ){
+            return res.status( 401 ).json({
+                ok: false,
+                msg: 'No tiene privilegios para editar este evento'
+            });
+        }
+
+        const nuevoEvento = {
+            ...req.body,
+            user: uid
+        }
+
+        const eventoActualizado = await Evento.findByIdAndUpdate( eventoId, nuevoEvento, { new: true } );
+
+        res.json({
+            ok: true,
+            evento: eventoActualizado
+        });
+
+    }catch(error){
+        console.log(error);
+        res.status(500).json({
+            ok: false,
+            msg: 'Hable con el administrador'
+        });
+    }
 }
 
 
 const eliminarEvento = async ( req, res = response ) => {
 
-    res.json({
-    //123456
-    ok: true,
-    msg: 'eliminarEvento'
-});
+const eventoId = req.params.id;
+
+    try{
+        const evento = await Evento.findById( eventoId );
+
+        if( !evento ){
+            return res.status(404).json({
+                ok: false,
+                msg: 'No se encontro por el id solicitado'
+            });
+        }
+
+        if( evento.user.toString() !== uid ){
+            return res.status( 401 ).json({
+                ok: false,
+                msg: 'No tiene privilegios para editar este evento'
+            });
+        }
+
+        await Evento.findByIdAndUpdate( eventoId );
+
+        res.json({
+            ok: true,
+        });
+
+    }catch(error){
+        console.log(error);
+        res.status(500).json({
+            ok: false,
+            msg: 'Hable con el administrador'
+        });
+    }
 }
 
 
