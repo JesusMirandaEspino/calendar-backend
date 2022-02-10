@@ -15,10 +15,11 @@ router.use( validarJWT );
 router.get('/', getEvento );
 
 
-router.post('/',  
+router.post('/events',  
 [
     check( 'titulo', 'El titulo es obligatorio' ).not().isEmpty(),
-    check( 'start', 'El titulo es obligatorio' ).custom( isDate ),
+    check( 'start', 'La fecha de inicio es obligatorio' ).custom( isDate ),
+    check( 'end', 'La fecha final es obligatorio' ).custom( isDate ),
     validarCampos
 ], crearEvento );
 

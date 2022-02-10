@@ -4,7 +4,7 @@ const UsuarioSchema = Schema({
 
     mane: {
         type: String,
-        require: true
+        required: true
     },
 
     email: {
@@ -15,7 +15,7 @@ const UsuarioSchema = Schema({
 
     password: {
         type: String,
-        require: true
+        required: true
     },
 
 });

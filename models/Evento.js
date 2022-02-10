@@ -4,7 +4,7 @@ const EventoSchema = Schema({
 
     title: {
         type: String,
-        require: true
+        required: true
     },
 
     notes: {
@@ -13,21 +13,26 @@ const EventoSchema = Schema({
 
     start: {
         type: String,
-        require: true,
+        required: true,
     },
 
     end: {
         type: String,
-        require: true
+        required: true
     },
 
     user: {
         type: Schema.Types.ObjectId,
-       // require: true
+        required: true,
         ref: 'Usuario'
     },
+});
 
 
+EventoSchema.method( 'toJSON', function(){
+    const { __v, _id, ...object } =  this.ObjectId();
+    object.id = _id;
+    return object;
 });
 
 
