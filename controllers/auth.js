@@ -103,7 +103,7 @@ const loginUsuario = async( req, res ) => {
 
 
 
-const revalidarUsuario = async ( req, res ) => {
+const revalidarUsuario = async ( req, res = response ) => {
 
     const uid = req.id;
     const name = req.name;
@@ -113,7 +113,9 @@ const revalidarUsuario = async ( req, res ) => {
 
         res.json({
             ok: true,
-            msg: 'renew'
+            token,
+            name, 
+            uid
         });
     }
 
